@@ -30,7 +30,7 @@ onBeforeUnmount(() => {
       <DialogOverlay class="eo-dialog-mask" />
       <!-- Escape is handled here: Reka listens on window, and in the editor the key doesn't get that far. -->
       <DialogContent
-        class="eo-dialog asc-window modal modal-dlg"
+        class="eo-dialog eo-vue-island asc-window modal modal-dlg"
         :style="{ width: `${width}px` }"
         :aria-label="label"
         :aria-describedby="undefined"

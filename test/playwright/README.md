@@ -33,7 +33,7 @@ Use `npm run test:ui` to step through a test.
 
 ## Moving to Vue
 
-Components that moved to Vue stay behind the `eo-vue-islands` flag in `localStorage`, next to their Backbone version. The `show` method of the Backbone view picks one, so the harness adapter doesn't change.
+Components that moved to Vue stay behind a flag, next to their Backbone version. The defaults are in `apps/common/main/lib/util/featureFlags.js`, and `eo-vue-islands` in `localStorage` overrides them with `1` or `0`. The `show` method of the Backbone view picks one, so the harness adapter doesn't change.
 
 Every spec runs twice: the `backbone` project with the flag off and the `vue` project with the flag on. Use `--project=vue` to run one of them. Playwright builds the Vue islands before it starts.
 
