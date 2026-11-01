@@ -33,7 +33,11 @@ Use `npm run test:ui` to step through a test.
 
 ## Moving to Vue
 
-Change only the adapter, so that it mounts the Vue component. The spec stays the same, and a green spec shows the behaviour is preserved.
+Components that moved to Vue stay behind the `eo-vue-islands` flag in `localStorage`, next to their Backbone version. The `show` method of the Backbone view picks one, so the harness adapter doesn't change.
+
+Every spec runs twice: the `backbone` project with the flag off and the `vue` project with the flag on. Use `--project=vue` to run one of them. Playwright builds the Vue islands before it starts.
+
+A green spec doesn't prove everything. `toBeVisible` passes for an element with `opacity: 0`, and the page has no editor around it. Also check the dialog in the real editor.
 
 So look things up in specs by what a user sees, such as `getByRole` and text, not by Backbone classes or ids such as `.modal-dlg` or `#id-dlg-newname`.
 

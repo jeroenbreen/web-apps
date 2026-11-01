@@ -18,14 +18,20 @@ Open http://localhost:6006. PhpStorm has a `Storybook` run configuration for thi
 
 | Path | Purpose |
 |---|---|
-| `stories/` | The stories, in the same folders as `test/playwright/tests`. |
+| `stories/` | The stories, per component and per stack. |
 | `.storybook/backbone.ts` | Builds the environment Backbone components expect and loads them with RequireJS. |
 | `.storybook/preview-head.html` | Loads `less.js` and the app styling. |
 
 The real app styling is compiled in the browser, so a story takes a moment to appear the first time.
 
-## Adding a Backbone component
+## Adding a component
 
-1. Create `stories/<folder>/<name>.stories.ts`.
-2. Load the component with `loadBackbone` in `loaders`. Pass separate lists when a view needs another module to be there first.
-3. Open it the way the real caller does, and close it again in `beforeEach`.
+Each component has a folder with one file per stack, so it shows up as `Common/RenameDialog/Backbone` and `Common/RenameDialog/Vue`. Storybook uses the Vue renderer for both.
+
+| File | Purpose |
+|---|---|
+| `stories/<folder>/<name>/backbone.stories.ts` | Load the component with `loadBackbone` in `loaders`, and pass separate lists when a view needs another module to be there first. Open it the way the real caller does, and close it again in `beforeEach`. |
+| `stories/<folder>/<name>/vue.stories.ts` | Import the `.vue` file. Components that use `EoDialog` also need `loadBackbone()`, because `EoDialog` reports to `Common.NotificationCenter`. |
+| `stories/<folder>/<name>/shared.ts` | What both variants share, such as the controls and play functions. |
+
+Use the same story names in both files, so you can compare them.

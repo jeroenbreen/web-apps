@@ -13,11 +13,26 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'backbone', use: { ...devices['Desktop Chrome'] } },
+    // Same specs and adapters, with the feature flag on.
+    {
+      name: 'vue',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: {
+          cookies: [],
+          origins: [{
+            origin: `http://127.0.0.1:${port}`,
+            localStorage: [{ name: 'eo-vue-islands', value: '1' }],
+          }],
+        },
+      },
+    },
   ],
   webServer: {
     // Serve the web-apps root: the harness loads apps/ and vendor/ from source.
-    command: `npx http-server ../.. -a 127.0.0.1 -p ${port} -c-1 --silent`,
+    // Only the Vue islands need a build first.
+    command: `npm --prefix ../../build run build:vue && npx http-server ../.. -a 127.0.0.1 -p ${port} -c-1 --silent`,
     url: `http://127.0.0.1:${port}/test/playwright/harness/index.html`,
     reuseExistingServer: !process.env.CI,
   },

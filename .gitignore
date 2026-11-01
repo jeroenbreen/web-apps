@@ -2,6 +2,7 @@
 Thumbs.db
 .DS_Store
 /deploy
+apps/common/main/vue/dist/
 build/node_modules
 build/plugins/**/node_modules/
 build/sprites/node_modules/

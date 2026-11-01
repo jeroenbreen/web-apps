@@ -18,3 +18,11 @@ export async function loadComponent(page: Page, component: string) {
 export function openComponent<T>(page: Page, options: unknown): Promise<T> {
   return page.evaluate((opts) => window.harness.open(opts), options) as Promise<T>
 }
+
+// For a test that ends with the component still open, or that checks it reports
+// nothing. The page closing rejects the open call, which is expected here.
+export function watchComponent(page: Page, options: unknown) {
+  const status = { reported: false }
+  openComponent(page, options).then(() => { status.reported = true }, () => {})
+  return status
+}

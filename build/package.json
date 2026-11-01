@@ -4,19 +4,24 @@
   "homepage": "http://www.onlyoffice.com",
   "private": true,
   "scripts": {
+    "build:vue": "webpack --config webpack.vue.mjs",
     "test": "npx -y mocha-headless-chrome@5.1.0 -a allow-file-access-from-files -a no-sandbox -f ../test/unit-tests/common/index.html"
   },
   "dependencies": {
     "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^7.1.2",
+    "esbuild-loader": "^4.5.0",
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
     "mini-css-extract-plugin": "^2.9.2",
+    "reka-ui": "^2.11.0",
     "sharp": "^0.35.0",
     "string-replace-loader": "3.3.0",
     "svgo": "^4.0.0",
     "terser": "^5.20.0",
     "terser-webpack-plugin": "^5.3.11",
+    "vue": "^3.5.44",
+    "vue-loader": "^17.4.2",
     "webpack": "^5.98.0",
     "webpack-cli": "^7.0.0"
   },

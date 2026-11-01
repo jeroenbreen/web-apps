@@ -211,6 +211,7 @@ const WEBPACK_CONFIGS = [
     'webpack.visioeditor.mjs',
     'webpack.pdfeditor.mjs',
     'webpack.forms.mjs',
+    'webpack.vue.mjs',
 ];
 
 const MOBILE_EDITORS = ['word', 'cell', 'slide', 'visio'];

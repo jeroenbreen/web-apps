@@ -21,6 +21,40 @@
         opacity: 0.6;
     }
 }
+// Same timing as the transitions in component/Window.js.
+@keyframes eo-dialog-mask-in {
+    from { opacity: 0; }
+}
+
+@keyframes eo-dialog-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.eo-dialog-mask {
+    .modals-mask();
+    position: fixed;
+    animation: eo-dialog-mask-in 0.3s;
+}
+
+.asc-window.eo-dialog {
+    position: fixed;
+    display: block;
+    inset: 0;
+    height: fit-content;
+    margin: auto;
+    opacity: 1;
+    z-index: @zindex-modal;
+    animation: eo-dialog-in 0.2s;
+
+    > .body {
+        position: relative;
+        top: 0;
+    }
+}
+
 .tool {
     .float-right();
     width: 20px;

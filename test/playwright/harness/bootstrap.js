@@ -31,6 +31,7 @@ require(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
     window.Common = window.Common || {};
     Common.UI = Common.UI || {};
     Common.UI.Scaling = { currentRatio: function () { return 1; } };
+    Common.Controllers = { Desktop: { isActive: function () { return false; } } };
     Common.Locale = {
         getCurrentLanguage: function () { return 'en'; },
         isCurrentLanguageRtl: function () { return false; }

@@ -29,7 +29,9 @@
  *
  */
 
-define([], function () { 'use strict';
+define([
+    'common/main/lib/util/VueIslands'
+], function () { 'use strict';
 
     Common.Views.RenameDialog = Common.UI.Window.extend(_.extend({
         options: {
@@ -86,6 +88,35 @@ define([], function () { 'use strict';
         },
 
         show: function() {
+            if (Common.VueIslands.isEnabled()) {
+                var dialog = this,
+                    args = arguments;
+                Common.VueIslands.load(function (islands) {
+                    dialog.showVue(islands);
+                }, function () {
+                    dialog.showBackbone.apply(dialog, args);
+                });
+                return;
+            }
+            this.showBackbone.apply(this, arguments);
+        },
+
+        showVue: function(islands) {
+            var handler = this.options.handler;
+            islands.openRenameDialog({
+                filename: this.options.filename,
+                maxLength: this.options.maxLength,
+                labels: {
+                    name: this.textName,
+                    invalidName: this.txtInvalidName + "*+:\"<>?|\/",
+                    ok: this.okButtonText,
+                    cancel: this.cancelButtonText
+                },
+                onResult: handler ? _.bind(handler, this) : undefined
+            });
+        },
+
+        showBackbone: function() {
             Common.UI.Window.prototype.show.apply(this, arguments);
 
             var me = this;
